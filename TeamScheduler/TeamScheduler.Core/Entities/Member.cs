@@ -18,6 +18,6 @@ namespace TeamScheduler.Core.Entities
 
         public virtual Team Team { get; set; }
 
-        public virtual List<WorkingHour> WorkingHours { get; set; }
+        public virtual List<UnitOfWork> UnitsOfWork { get; set; }
     }
 }

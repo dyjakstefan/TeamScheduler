@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace TeamScheduler.Infrastructure.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -115,7 +115,7 @@ namespace TeamScheduler.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WorkingHours",
+                name: "UnitsOfWork",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -128,15 +128,15 @@ namespace TeamScheduler.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WorkingHours", x => x.Id);
+                    table.PrimaryKey("PK_UnitsOfWork", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WorkingHours_Days_DayId",
+                        name: "FK_UnitsOfWork_Days_DayId",
                         column: x => x.DayId,
                         principalTable: "Days",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_WorkingHours_Members_MemberId",
+                        name: "FK_UnitsOfWork_Members_MemberId",
                         column: x => x.MemberId,
                         principalTable: "Members",
                         principalColumn: "Id",
@@ -164,20 +164,20 @@ namespace TeamScheduler.Infrastructure.Migrations
                 column: "TeamId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WorkingHours_DayId",
-                table: "WorkingHours",
+                name: "IX_UnitsOfWork_DayId",
+                table: "UnitsOfWork",
                 column: "DayId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WorkingHours_MemberId",
-                table: "WorkingHours",
+                name: "IX_UnitsOfWork_MemberId",
+                table: "UnitsOfWork",
                 column: "MemberId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "WorkingHours");
+                name: "UnitsOfWork");
 
             migrationBuilder.DropTable(
                 name: "Days");

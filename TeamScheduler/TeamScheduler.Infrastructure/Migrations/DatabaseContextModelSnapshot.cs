@@ -11,11 +11,10 @@ using TeamScheduler.Infrastructure.EfContext;
 
 namespace TeamScheduler.Infrastructure.Migrations
 {
-    [DbContext(typeof(EfContext.EfContext))]
-    [Migration("20180903205449_Initial")]
-    partial class Initial
+    [DbContext(typeof(DatabaseContext))]
+    partial class DatabaseContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,27 +101,7 @@ namespace TeamScheduler.Infrastructure.Migrations
                     b.ToTable("Teams");
                 });
 
-            modelBuilder.Entity("TeamScheduler.Core.Entities.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<int>("Role");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("TeamScheduler.Core.Entities.WorkingHour", b =>
+            modelBuilder.Entity("TeamScheduler.Core.Entities.UnitOfWork", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -143,7 +122,27 @@ namespace TeamScheduler.Infrastructure.Migrations
 
                     b.HasIndex("MemberId");
 
-                    b.ToTable("WorkingHours");
+                    b.ToTable("UnitsOfWork");
+                });
+
+            modelBuilder.Entity("TeamScheduler.Core.Entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<int>("Role");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("TeamScheduler.Core.Entities.Day", b =>
@@ -160,7 +159,7 @@ namespace TeamScheduler.Infrastructure.Migrations
                         .HasForeignKey("TeamId");
 
                     b.HasOne("TeamScheduler.Core.Entities.User", "User")
-                        .WithMany("members")
+                        .WithMany("Members")
                         .HasForeignKey("UserId");
                 });
 
@@ -171,14 +170,14 @@ namespace TeamScheduler.Infrastructure.Migrations
                         .HasForeignKey("TeamId");
                 });
 
-            modelBuilder.Entity("TeamScheduler.Core.Entities.WorkingHour", b =>
+            modelBuilder.Entity("TeamScheduler.Core.Entities.UnitOfWork", b =>
                 {
                     b.HasOne("TeamScheduler.Core.Entities.Day", "Day")
-                        .WithMany("WorkingHours")
+                        .WithMany("UnitsOfWorks")
                         .HasForeignKey("DayId");
 
                     b.HasOne("TeamScheduler.Core.Entities.Member", "Member")
-                        .WithMany("WorkingHours")
+                        .WithMany("UnitsOfWork")
                         .HasForeignKey("MemberId");
                 });
 #pragma warning restore 612, 618

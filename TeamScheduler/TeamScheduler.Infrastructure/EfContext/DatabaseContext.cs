@@ -6,9 +6,9 @@ using TeamScheduler.Core.Entities;
 
 namespace TeamScheduler.Infrastructure.EfContext
 {
-    public class EfContext : DbContext
+    public class DatabaseContext : DbContext
     {
-        public EfContext(DbContextOptions<EfContext> options)
+        public DatabaseContext(DbContextOptions<DatabaseContext> options)
             :base(options)
         {
         }
@@ -23,7 +23,7 @@ namespace TeamScheduler.Infrastructure.EfContext
 
         public DbSet<Day> Days { get; set; }
 
-        public DbSet<WorkingHour> WorkingHours { get; set; }
+        public DbSet<UnitOfWork> UnitsOfWork { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder opitonsBuilder)
         {

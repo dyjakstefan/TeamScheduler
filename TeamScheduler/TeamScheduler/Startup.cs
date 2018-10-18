@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AutoMapper;
+using MediatR;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 using TeamScheduler.Infrastructure.EfContext;
 
 namespace TeamScheduler.Api
@@ -20,7 +23,12 @@ namespace TeamScheduler.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddEntityFrameworkSqlServer()
-                .AddDbContext<EfContext>(option => option.UseSqlServer(Configuration.GetConnectionString("Default")));
+                .AddDbContext<DatabaseContext>(option => option.UseSqlServer(Configuration.GetConnectionString("Default")));
+
+            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Info {Title = "Team Scheduler", Version = "v1"}); });
+
+            services.AddAutoMapper();
+            services.AddMediatR();
             services.AddMvc();
         }
 
@@ -31,6 +39,13 @@ namespace TeamScheduler.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => 
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Team Scheduler V1");
+                c.RoutePrefix = string.Empty;
+            });
 
             app.UseMvc();
         }
