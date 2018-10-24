@@ -6,6 +6,8 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TeamScheduler.Core.Commands;
+using TeamScheduler.Infrastructure.Services;
+using TeamScheduler.Infrastructure.Services.Abstract;
 
 namespace TeamScheduler.Api.Controllers
 {
@@ -14,10 +16,12 @@ namespace TeamScheduler.Api.Controllers
     public class UserController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IUserService userService;
 
-        public UserController(IMediator mediator)
+        public UserController(IMediator mediator, IUserService userService)
         {
             this.mediator = mediator;
+            this.userService = userService;
         }
 
         [HttpPost]
@@ -25,6 +29,18 @@ namespace TeamScheduler.Api.Controllers
         {
             await mediator.Send(command);
             return Ok();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get([FromQuery] string email)
+        {
+            var user = await userService.GetUser(email);
+            if (user != null)
+            {
+                return Ok(user);
+            }
+
+            return NoContent();
         }
     }
 }
