@@ -42,5 +42,12 @@ namespace TeamScheduler.Api.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromBody] DeleteUserCommand command)
+        {
+            await mediator.Send(command);
+            return Ok();
+        }
     }
 }
