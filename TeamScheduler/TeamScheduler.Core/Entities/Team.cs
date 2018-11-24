@@ -11,6 +11,10 @@ namespace TeamScheduler.Core.Entities
 
         public string Address { get; set; }
 
+        public int LeaderId { get; set; }
+
+        public virtual User Leader { get; set; }
+
         public virtual List<Member> Members { get; set; }
 
         public virtual List<Schedule> Schedules { get; set; }

@@ -14,14 +14,14 @@ using TeamScheduler.Infrastructure.Services.Abstract;
 namespace TeamScheduler.Api.Controllers
 {
     [Produces("application/json")]
-    [Route("api/User")]
-    public class UserController : Controller
+    [Route("api/[controller]")]
+    public class UsersController : Controller
     {
         private readonly IMediator mediator;
         private readonly IUserService userService;
         private readonly IMemoryCache cache;
 
-        public UserController(IMediator mediator, IUserService userService, IMemoryCache cache)
+        public UsersController(IMediator mediator, IUserService userService, IMemoryCache cache)
         {
             this.mediator = mediator;
             this.userService = userService;

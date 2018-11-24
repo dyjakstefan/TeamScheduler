@@ -16,7 +16,7 @@ namespace TeamScheduler.Infrastructure.CommandHandlers
             this.context = context;
         }
 
-        protected async override Task Handle(DeleteUserCommand request, CancellationToken cancellationToken)
+        protected override async Task Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
             var user = await context.Users.SingleOrDefaultAsync(x => x.Email == request.Email);
             if (user != null)
