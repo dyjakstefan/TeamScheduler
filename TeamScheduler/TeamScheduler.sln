@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamScheduler.Api", "TeamScheduler\TeamScheduler.Api.csproj", "{386E0950-3BF7-46DF-956F-BE89F82873EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamScheduler.Api", "TeamScheduler.Api\TeamScheduler.Api.csproj", "{386E0950-3BF7-46DF-956F-BE89F82873EF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamScheduler.Core", "TeamScheduler.Core\TeamScheduler.Core.csproj", "{E6904901-A8BB-4E53-B21B-8FE02A5FF74E}"
 EndProject

@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using TeamScheduler.Core.Commands;
+using TeamScheduler.Infrastructure.Extensions;
 using TeamScheduler.Infrastructure.Services;
 using TeamScheduler.Infrastructure.Services.Abstract;
 
@@ -17,11 +19,13 @@ namespace TeamScheduler.Api.Controllers
     {
         private readonly IMediator mediator;
         private readonly IUserService userService;
+        private readonly IMemoryCache cache;
 
-        public UserController(IMediator mediator, IUserService userService)
+        public UserController(IMediator mediator, IUserService userService, IMemoryCache cache)
         {
             this.mediator = mediator;
             this.userService = userService;
+            this.cache = cache;
         }
 
         [HttpPost]
@@ -29,6 +33,16 @@ namespace TeamScheduler.Api.Controllers
         {
             await mediator.Send(command);
             return Ok();
+        }
+
+        [Route("login")]
+        [HttpPost]
+        public async Task<IActionResult> Login([FromBody] LoginCommand command)
+        {
+            command.TokenId = Guid.NewGuid();
+            await mediator.Send(command);
+            var jwt = cache.GetJwt(command.TokenId);
+            return Ok(jwt);
         }
 
         [HttpGet]

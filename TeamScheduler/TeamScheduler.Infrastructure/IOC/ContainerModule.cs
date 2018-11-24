@@ -19,6 +19,7 @@ namespace TeamScheduler.Infrastructure.IOC
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterModule<ServiceModule>();
+            builder.RegisterModule(new SettingsModule(configuration));
         }
     }
 }

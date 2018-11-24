@@ -12,7 +12,8 @@ namespace TeamScheduler.Infrastructure.MappingProfiles
     {
         public UserProfile()
         {
-            CreateMap<CreateUserCommand, User>();
+            CreateMap<CreateUserCommand, User>()
+                .ForMember(x => x.Password, opt => opt.Ignore());
             CreateMap<User, UserDto>();
         }
     }

@@ -2,28 +2,27 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/TeamScheduler.Api",
+      "sslPort": 0
+    },
     "iisExpress": {
-      "applicationUrl": "http://localhost:62726/",
+      "applicationUrl": "http://localhost:58977/",
       "sslPort": 0
     }
   },
   "profiles": {
+    "TeamScheduler.Api": {
+      "commandName": "Project",
+      "applicationUrl": "http://localhost:5000"
+    },
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "api/values",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
-    "TeamScheduler": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      "launchUrl": "api/values",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:62727/"
+      "launchBrowser": true,
+      "launchUrl": "api/values"
     }
   }
 }

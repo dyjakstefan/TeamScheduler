@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Text;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
 using TeamScheduler.Infrastructure.EfContext;
 using TeamScheduler.Infrastructure.IOC;
@@ -15,8 +18,7 @@ using TeamScheduler.Infrastructure.IOC;
 namespace TeamScheduler.Api
 {
     public class Startup
-    {
-        public Startup(IConfiguration configuration)
+    {public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
@@ -34,8 +36,24 @@ namespace TeamScheduler.Api
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Info { Title = "Team Scheduler", Version = "v1" }); });
             services.AddAutoMapper();
             services.AddMediatR();
-            services.AddMvc();
+            services.AddAuthentication(x =>
+                {
+                    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(x =>
+                {
+                    x.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidIssuer = Configuration["jwt:issuer"],
+                        ValidateAudience = false,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["jwt:key"]))
+                    };
+                });
 
+            services.AddMvc();
             var builder = new ContainerBuilder();
             builder.Populate(services);
             builder.RegisterModule(new ContainerModule(Configuration));
@@ -58,6 +76,7 @@ namespace TeamScheduler.Api
                 c.RoutePrefix = string.Empty;
             });
 
+            app.UseAuthentication();
             app.UseMvc();
             appLifeTime.ApplicationStopped.Register(() => ApplicationContainer.Dispose());
         }

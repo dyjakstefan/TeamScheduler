@@ -21,3 +21,4 @@ namespace TeamScheduler.Core.Entities
         public virtual List<UnitOfWork> UnitsOfWork { get; set; }
     }
 }
+ 

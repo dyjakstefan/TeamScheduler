@@ -16,8 +16,22 @@ namespace TeamScheduler.Core.Entities
 
         public string PhoneNumber { get; set; }
 
+        public string Password { get; set; }
+
+        public string Salt { get; set; }
+
         public Role Role { get; set; }
 
         public virtual List<Member> Members { get; set; }
+
+        public void SetPassword(string hash)
+        {
+            this.Password = hash;
+        }
+
+        public void SetSalt(string salt)
+        {
+            this.Salt = salt;
+        }
     }
 }
