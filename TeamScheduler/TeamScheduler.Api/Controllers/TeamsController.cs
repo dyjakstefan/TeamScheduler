@@ -25,7 +25,8 @@ namespace TeamScheduler.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateTeamCommand command)
         {
-            command.LeaderId = User.Identity.Name;
+            //command.LeaderId = User.Identity.Name;
+            command.LeaderId = "4";
             await mediator.Send(command);
             return Ok();
         }
@@ -48,14 +49,14 @@ namespace TeamScheduler.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllTeams()
         {
-            var teams = teamService.GetAll();
+            var teams = await teamService.GetAll();
             return Ok(teams);
         }
 
         [HttpGet]
         public async Task<IActionResult> Get(int id)
         {
-            var team = teamService.Get(id);
+            var team = await teamService.Get(id);
             return Ok(team);
         }
     }
