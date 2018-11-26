@@ -26,7 +26,7 @@ namespace TeamScheduler.Api.Controllers
         public async Task<IActionResult> Create([FromBody] CreateTeamCommand command)
         {
             //command.LeaderId = User.Identity.Name;
-            command.LeaderId = "4";
+            command.UserId = "4";
             await mediator.Send(command);
             return Ok();
         }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using TeamScheduler.Core.Responses;
+using TeamScheduler.Core.Dto;
 using TeamScheduler.Infrastructure.EfContext;
 using TeamScheduler.Infrastructure.Services.Abstract;
 

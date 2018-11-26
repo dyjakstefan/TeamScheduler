@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using TeamScheduler.Core.Dto;
-using TeamScheduler.Core.Responses;
 using TeamScheduler.Infrastructure.EfContext;
 using TeamScheduler.Infrastructure.Services.Abstract;
 
@@ -24,13 +23,13 @@ namespace TeamScheduler.Infrastructure.Services
 
         public async Task<TeamDto> Get(int id)
         {
-            var team = await context.Teams.SingleOrDefaultAsync(x => x.Id == id);
+            var team = await context.Teams.Include(x => x.Members).SingleOrDefaultAsync(x => x.Id == id);
             return team != null ? mapper.Map<TeamDto>(team) : null;
         }
 
         public async Task<List<TeamDto>> GetAll()
         {
-            var teams = await context.Teams.ToListAsync();
+            var teams = await context.Teams.Include(x => x.Members).ToListAsync();
             return mapper.Map<List<TeamDto>>(teams);
         }
     }

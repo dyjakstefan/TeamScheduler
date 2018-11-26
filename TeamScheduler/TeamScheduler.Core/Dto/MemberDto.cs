@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using TeamScheduler.Core.Abstract;
 using TeamScheduler.Core.Enums;
 
-namespace TeamScheduler.Core.Entities
+namespace TeamScheduler.Core.Dto
 {
-    public class Member : Entity
+    public class MemberDto
     {
+        public int Id { get; set; }
+
         public int Hours { get; set; }
 
         public Title Title { get; set; }
@@ -17,12 +18,5 @@ namespace TeamScheduler.Core.Entities
         public int UserId { get; set; }
 
         public int TeamId { get; set; }
-
-        public virtual User User { get; set; }
-
-        public virtual Team Team { get; set; }
-
-        public virtual List<UnitOfWork> UnitsOfWork { get; set; }
     }
 }
- 

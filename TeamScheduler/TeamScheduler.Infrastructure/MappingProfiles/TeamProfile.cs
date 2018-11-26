@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
 using TeamScheduler.Core.Commands;
+using TeamScheduler.Core.Dto;
 using TeamScheduler.Core.Entities;
 
 namespace TeamScheduler.Infrastructure.MappingProfiles
@@ -11,9 +12,8 @@ namespace TeamScheduler.Infrastructure.MappingProfiles
     {
         public TeamProfile()
         {
-            CreateMap<CreateTeamCommand, Team>()
-                .ForMember(dest => dest.LeaderId,
-                    opt => opt.MapFrom(src => int.Parse(src.LeaderId)));
+            CreateMap<CreateTeamCommand, Team>();
+            CreateMap<Team, TeamDto>();
         }
     }
 }

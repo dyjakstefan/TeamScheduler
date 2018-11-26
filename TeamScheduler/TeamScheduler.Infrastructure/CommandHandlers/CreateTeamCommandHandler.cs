@@ -5,8 +5,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using TeamScheduler.Core.Commands;
 using TeamScheduler.Core.Entities;
+using TeamScheduler.Core.Enums;
 using TeamScheduler.Infrastructure.EfContext;
 
 namespace TeamScheduler.Infrastructure.CommandHandlers
@@ -24,9 +26,27 @@ namespace TeamScheduler.Infrastructure.CommandHandlers
 
         protected override async Task Handle(CreateTeamCommand request, CancellationToken cancellationToken)
         {
-            var team = mapper.Map<Team>(request);
-            context.Teams.Add(team);
-            await context.SaveChangesAsync();
+            int userId;
+            if (int.TryParse(request.UserId, out userId))
+            {
+                var member = await context.Members.SingleOrDefaultAsync(x => x.UserId == userId);
+                if (member == null)
+                {
+                    member = new Member{ UserId = userId, Title = Title.Manager };
+                }
+
+                var team = mapper.Map<Team>(request);
+                context.Teams.Add(team);
+                await context.SaveChangesAsync();
+                member.TeamId = team.Id;
+                context.Members.Add(member);
+                await context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception("Could not parse user id.");
+            }
+
         }
     }
 }

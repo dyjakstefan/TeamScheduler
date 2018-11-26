@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TeamScheduler.Core.Responses
+namespace TeamScheduler.Core.Dto
 {
     public class UserDto
     {
+        public int Id { get; set; }
+
         public string FirstName { get; set; }
 
         public string LastName { get; set; }

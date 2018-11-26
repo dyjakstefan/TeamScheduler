@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TeamScheduler.Infrastructure.EfContext;
 
 namespace TeamScheduler.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20181126100657_UpdateForeignKeys")]
+    partial class UpdateForeignKeys
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,7 +50,7 @@ namespace TeamScheduler.Infrastructure.Migrations
 
                     b.Property<bool>("IsPartTime");
 
-                    b.Property<int>("TeamId");
+                    b.Property<int?>("TeamId");
 
                     b.Property<int>("Title");
 
@@ -164,8 +166,7 @@ namespace TeamScheduler.Infrastructure.Migrations
                 {
                     b.HasOne("TeamScheduler.Core.Entities.Team", "Team")
                         .WithMany("Members")
-                        .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("TeamId");
 
                     b.HasOne("TeamScheduler.Core.Entities.User", "User")
                         .WithMany("Members")

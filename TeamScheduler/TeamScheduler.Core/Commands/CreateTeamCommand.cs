@@ -13,6 +13,6 @@ namespace TeamScheduler.Core.Commands
 
         public string Name { get; set; }
 
-        public string LeaderId { get; set; }
+        public string UserId { get; set; }
     }
 }
