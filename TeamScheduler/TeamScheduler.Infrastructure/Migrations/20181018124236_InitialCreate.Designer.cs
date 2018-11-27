@@ -71,7 +71,7 @@ namespace TeamScheduler.Infrastructure.Migrations
 
                     b.Property<DateTime>("CreatedAt");
 
-                    b.Property<DateTime>("EntAt");
+                    b.Property<DateTime>("EndAt");
 
                     b.Property<bool>("IsAccepted");
 

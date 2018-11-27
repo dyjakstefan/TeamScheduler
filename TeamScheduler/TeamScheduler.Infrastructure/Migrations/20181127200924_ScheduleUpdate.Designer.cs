@@ -10,8 +10,8 @@ using TeamScheduler.Infrastructure.EfContext;
 namespace TeamScheduler.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20181125193616_TeamUpdate")]
-    partial class TeamUpdate
+    [Migration("20181127200924_ScheduleUpdate")]
+    partial class ScheduleUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,11 +50,11 @@ namespace TeamScheduler.Infrastructure.Migrations
 
                     b.Property<bool>("IsPartTime");
 
-                    b.Property<int?>("TeamId");
+                    b.Property<int>("TeamId");
 
                     b.Property<int>("Title");
 
-                    b.Property<int?>("UserId");
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
@@ -77,9 +77,11 @@ namespace TeamScheduler.Infrastructure.Migrations
 
                     b.Property<bool>("IsAccepted");
 
+                    b.Property<string>("Name");
+
                     b.Property<DateTime>("StartAt");
 
-                    b.Property<int?>("TeamId");
+                    b.Property<int>("TeamId");
 
                     b.Property<DateTime>("UpdatedAt");
 
@@ -98,13 +100,9 @@ namespace TeamScheduler.Infrastructure.Migrations
 
                     b.Property<string>("Address");
 
-                    b.Property<int>("LeaderId");
-
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("LeaderId");
 
                     b.ToTable("Teams");
                 });
@@ -170,25 +168,20 @@ namespace TeamScheduler.Infrastructure.Migrations
                 {
                     b.HasOne("TeamScheduler.Core.Entities.Team", "Team")
                         .WithMany("Members")
-                        .HasForeignKey("TeamId");
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("TeamScheduler.Core.Entities.User", "User")
                         .WithMany("Members")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("TeamScheduler.Core.Entities.Schedule", b =>
                 {
                     b.HasOne("TeamScheduler.Core.Entities.Team", "Team")
                         .WithMany("Schedules")
-                        .HasForeignKey("TeamId");
-                });
-
-            modelBuilder.Entity("TeamScheduler.Core.Entities.Team", b =>
-                {
-                    b.HasOne("TeamScheduler.Core.Entities.User", "Leader")
-                        .WithMany()
-                        .HasForeignKey("LeaderId")
+                        .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -36,7 +36,7 @@ namespace TeamScheduler.Infrastructure.CommandHandlers
             }
             else
             {
-                throw new Exception("Could not add this member.");
+                throw new Exception("Could not Delete this member.");
             }
         }
     }

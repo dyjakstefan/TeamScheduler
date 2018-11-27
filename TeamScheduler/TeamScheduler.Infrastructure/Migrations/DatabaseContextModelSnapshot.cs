@@ -71,13 +71,15 @@ namespace TeamScheduler.Infrastructure.Migrations
 
                     b.Property<DateTime>("CreatedAt");
 
-                    b.Property<DateTime>("EntAt");
+                    b.Property<DateTime>("EndAt");
 
                     b.Property<bool>("IsAccepted");
 
+                    b.Property<string>("Name");
+
                     b.Property<DateTime>("StartAt");
 
-                    b.Property<int?>("TeamId");
+                    b.Property<int>("TeamId");
 
                     b.Property<DateTime>("UpdatedAt");
 
@@ -177,7 +179,8 @@ namespace TeamScheduler.Infrastructure.Migrations
                 {
                     b.HasOne("TeamScheduler.Core.Entities.Team", "Team")
                         .WithMany("Schedules")
-                        .HasForeignKey("TeamId");
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("TeamScheduler.Core.Entities.UnitOfWork", b =>

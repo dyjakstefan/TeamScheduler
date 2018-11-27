@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using TeamScheduler.Core.Abstract;
 
-namespace TeamScheduler.Core.Entities
+namespace TeamScheduler.Core.Dto
 {
-    public class Schedule : Entity
+    public class ScheduleDto
     {
-        public bool IsAccepted { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
@@ -20,9 +19,5 @@ namespace TeamScheduler.Core.Entities
         public DateTime EndAt { get; set; }
 
         public int TeamId { get; set; }
-
-        public virtual Team Team { get; set; }
-
-        public virtual List<Day> Days { get; set; }
     }
 }
