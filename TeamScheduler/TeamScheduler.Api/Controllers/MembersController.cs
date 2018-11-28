@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TeamScheduler.Core.Commands;
 
 namespace TeamScheduler.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class MembersController : Controller
     {

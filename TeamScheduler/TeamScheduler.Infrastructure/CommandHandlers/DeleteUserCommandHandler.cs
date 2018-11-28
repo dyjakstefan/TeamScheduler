@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -18,7 +19,12 @@ namespace TeamScheduler.Infrastructure.CommandHandlers
 
         protected override async Task Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
-            var user = await context.Users.SingleOrDefaultAsync(x => x.Email == request.Email);
+            if (!int.TryParse(request.UserId, out var managerId))
+            {
+                throw new Exception("Could not parse user id.");
+            }
+
+            var user = await context.Users.SingleOrDefaultAsync(x => x.Id == managerId);
             if (user != null)
             {
                 context.Users.Remove(user);

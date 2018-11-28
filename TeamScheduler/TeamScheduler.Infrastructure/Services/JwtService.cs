@@ -39,7 +39,8 @@ namespace TeamScheduler.Infrastructure.Services
                 issuer: settings.Issuer,
                 claims: claims,
                 notBefore: now,
-                expires: expires
+                expires: expires,
+                signingCredentials: signingCredentials
             );
             var token = new JwtSecurityTokenHandler().WriteToken(jwt);
 

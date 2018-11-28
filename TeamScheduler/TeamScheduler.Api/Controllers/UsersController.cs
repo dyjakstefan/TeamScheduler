@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
@@ -28,6 +29,7 @@ namespace TeamScheduler.Api.Controllers
             this.cache = cache;
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateUserCommand command)
         {
@@ -36,8 +38,9 @@ namespace TeamScheduler.Api.Controllers
         }
 
         [Route("login")]
+        [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] LoginCommand command)
+        public async Task<IActionResult> Login([FromQuery] LoginCommand command)
         {
             command.TokenId = Guid.NewGuid();
             await mediator.Send(command);
@@ -45,6 +48,7 @@ namespace TeamScheduler.Api.Controllers
             return Ok(jwt);
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] string email)
         {
@@ -57,9 +61,11 @@ namespace TeamScheduler.Api.Controllers
             return NoContent();
         }
 
+        [Authorize]
         [HttpDelete]
         public async Task<IActionResult> Delete([FromBody] DeleteUserCommand command)
         {
+            command.UserId = User.Identity.Name;
             await mediator.Send(command);
             return Ok();
         }

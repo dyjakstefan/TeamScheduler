@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
@@ -33,7 +34,23 @@ namespace TeamScheduler.Api
             services.AddEntityFrameworkSqlServer()
                 .AddDbContext<DatabaseContext>(option => option.UseSqlServer(Configuration.GetConnectionString("Default")));
 
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Info { Title = "Team Scheduler", Version = "v1" }); });
+            services.AddSwaggerGen(c =>
+            {
+                var security = new Dictionary<string, IEnumerable<string>>
+                {
+                    {"Bearer", new string[] { }},
+                };
+
+                c.SwaggerDoc("v1", new Info { Title = "Team Scheduler", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme.",
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "apiKey"
+                });
+                c.AddSecurityRequirement(security);
+            });
             services.AddAutoMapper();
             services.AddMediatR();
             services.AddAuthentication(x =>

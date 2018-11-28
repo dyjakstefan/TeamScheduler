@@ -7,6 +7,6 @@ namespace TeamScheduler.Core.Commands
 {
     public class DeleteUserCommand : IRequest
     {
-        public string Email { get; set; }
+        public string UserId { get; set; }
     }
 }
