@@ -11,6 +11,7 @@ namespace TeamScheduler.Api.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
+    [ApiController]
     public class MembersController : Controller
     {
         private readonly IMediator mediator;
@@ -23,8 +24,7 @@ namespace TeamScheduler.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] AddMemberCommand command)
         {
-            //command.ManagerId = User.Identity.Name;
-            command.ManagerId = "4";
+            command.ManagerId = User.Identity.Name;
             await mediator.Send(command);
             return Ok();
         }
@@ -32,8 +32,7 @@ namespace TeamScheduler.Api.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete([FromBody] DeleteMemberCommand command)
         {
-            //command.ManagerId = User.Identity.Name;
-            command.ManagerId = "4";
+            command.ManagerId = User.Identity.Name;
             await mediator.Send(command);
             return Ok();
         }
@@ -41,8 +40,7 @@ namespace TeamScheduler.Api.Controllers
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] UpdateMemberCommand command)
         {
-            //command.ManagerId = User.Identity.Name;
-            command.ManagerId = "4";
+            command.ManagerId = User.Identity.Name;
             await mediator.Send(command);
             return Ok();
         }

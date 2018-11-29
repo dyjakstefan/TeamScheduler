@@ -13,6 +13,7 @@ namespace TeamScheduler.Api.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
+    [ApiController]
     public class TeamsController : Controller
     {
         private readonly IMediator mediator;
@@ -27,8 +28,7 @@ namespace TeamScheduler.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateTeamCommand command)
         {
-            //command.LeaderId = User.Identity.Name;
-            command.UserId = "4";
+            command.UserId = User.Identity.Name;
             await mediator.Send(command);
             return Ok();
         }
