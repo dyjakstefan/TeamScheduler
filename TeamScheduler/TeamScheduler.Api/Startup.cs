@@ -70,6 +70,7 @@ namespace TeamScheduler.Api
                     };
                 });
 
+            services.AddCors();
             services.AddMvc();
             var builder = new ContainerBuilder();
             builder.Populate(services);
@@ -94,6 +95,8 @@ namespace TeamScheduler.Api
             });
 
             app.UseAuthentication();
+            app.UseCors(builder =>
+                builder.AllowAnyOrigin());
             app.UseMvc();
             appLifeTime.ApplicationStopped.Register(() => ApplicationContainer.Dispose());
         }

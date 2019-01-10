@@ -16,6 +16,5 @@ namespace TeamScheduler.Core.Entities
         public virtual Day Day { get; set; }
 
         public virtual Member Member { get; set; }
-
     }
 }

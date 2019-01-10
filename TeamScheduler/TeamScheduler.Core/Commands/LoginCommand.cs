@@ -15,7 +15,6 @@ namespace TeamScheduler.Core.Commands
 
         public string Password { get; set; }
 
-
         public Guid TokenId { get; set; }
     }
 }
