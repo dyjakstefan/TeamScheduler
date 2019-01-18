@@ -34,8 +34,10 @@ namespace TeamScheduler.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateUserCommand command)
         {
+            command.TokenId = Guid.NewGuid();
             await mediator.Send(command);
-            return Ok();
+            var jwt = cache.GetJwt(command.TokenId);
+            return Ok(jwt);
         }
 
         [Route("login")]
