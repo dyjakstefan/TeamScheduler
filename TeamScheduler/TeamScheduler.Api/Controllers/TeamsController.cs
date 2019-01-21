@@ -51,11 +51,11 @@ namespace TeamScheduler.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllTeams()
         {
-            var teams = await teamService.GetAll();
+            var teams = await teamService.GetAllForUser(User.Identity.Name);
             return Ok(teams);
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             var team = await teamService.Get(id);

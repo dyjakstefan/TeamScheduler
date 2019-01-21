@@ -10,6 +10,6 @@ namespace TeamScheduler.Infrastructure.Services.Abstract
     {
         Task<TeamDto> Get(int id);
 
-        Task<List<TeamDto>> GetAll();
+        Task<List<TeamDto>> GetAllForUser(string id);
     }
 }

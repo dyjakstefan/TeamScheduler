@@ -29,12 +29,7 @@ namespace TeamScheduler.Infrastructure.CommandHandlers
             int userId;
             if (int.TryParse(request.UserId, out userId))
             {
-                var member = await context.Members.SingleOrDefaultAsync(x => x.UserId == userId);
-                if (member == null)
-                {
-                    member = new Member{ UserId = userId, Title = Title.Manager };
-                }
-
+                var member = new Member{ UserId = userId, Title = Title.Manager };
                 var team = mapper.Map<Team>(request);
                 context.Teams.Add(team);
                 await context.SaveChangesAsync();

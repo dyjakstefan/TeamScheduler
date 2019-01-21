@@ -33,7 +33,7 @@ namespace TeamScheduler.Infrastructure.CommandHandlers
                 throw new Exception("Could not parse user id.");
             }
 
-            var team = await context.Teams.SingleOrDefaultAsync(x =>
+            var team = await context.Teams.Include(x => x.Members).SingleOrDefaultAsync(x =>
                 x.Id == request.TeamId && x.Members.Any(y => y.UserId == managerId && y.Title == Title.Manager));
             if (team != null)
             {

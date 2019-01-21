@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -27,10 +28,18 @@ namespace TeamScheduler.Infrastructure.Services
             return team != null ? mapper.Map<TeamDto>(team) : null;
         }
 
-        public async Task<List<TeamDto>> GetAll()
+        public async Task<List<TeamDto>> GetAllForUser(string userId)
         {
-            var teams = await context.Teams.Include(x => x.Members).ToListAsync();
-            return mapper.Map<List<TeamDto>>(teams);
+            int parsedUserId;
+            if (int.TryParse(userId, out parsedUserId))
+            {
+                var teams = await context.Teams.Include(x => x.Members).Where(x => x.Members.Any(z => z.UserId == parsedUserId)).ToListAsync();
+                return mapper.Map<List<TeamDto>>(teams);
+            }
+            else
+            {
+                throw new Exception("Could not parse user id.");
+            }
         }
     }
 }

@@ -12,6 +12,6 @@ namespace TeamScheduler.Core.Commands
             
         }
 
-        public int TeamId { get; set; }
+        public int Id { get; set; }
     }
 }

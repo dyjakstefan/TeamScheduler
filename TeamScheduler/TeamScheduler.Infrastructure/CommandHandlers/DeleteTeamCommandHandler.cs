@@ -21,7 +21,7 @@ namespace TeamScheduler.Infrastructure.CommandHandlers
 
         protected override async Task Handle(DeleteTeamCommand request, CancellationToken cancellationToken)
         {
-            var team = await context.Teams.SingleOrDefaultAsync(x => x.Id == request.TeamId);
+            var team = await context.Teams.SingleOrDefaultAsync(x => x.Id == request.Id);
             if (team != null)
             {
                 context.Teams.Remove(team);
