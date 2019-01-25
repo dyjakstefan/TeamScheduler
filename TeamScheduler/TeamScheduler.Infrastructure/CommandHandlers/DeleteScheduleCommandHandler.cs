@@ -11,18 +11,17 @@ using TeamScheduler.Core.Commands;
 using TeamScheduler.Core.Entities;
 using TeamScheduler.Core.Enums;
 using TeamScheduler.Infrastructure.EfContext;
+using Task = System.Threading.Tasks.Task;
 
 namespace TeamScheduler.Infrastructure.CommandHandlers
 {
     public class DeleteScheduleCommandHandler : AsyncRequestHandler<DeleteScheduleCommand>
     {
         private readonly DatabaseContext context;
-        private readonly IMapper mapper;
 
-        public DeleteScheduleCommandHandler(DatabaseContext context, IMapper mapper)
+        public DeleteScheduleCommandHandler(DatabaseContext context)
         {
             this.context = context;
-            this.mapper = mapper;
         }
 
         protected override async Task Handle(DeleteScheduleCommand request, CancellationToken cancellationToken)

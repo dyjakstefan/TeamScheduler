@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using MediatR;
+using Newtonsoft.Json;
 using TeamScheduler.Core.Enums;
 
 namespace TeamScheduler.Core.Commands
 {
     public class AddMemberCommand : IRequest
     {
+        [JsonIgnore]
         public string ManagerId { get; set; }
 
         public int TeamId { get; set; }

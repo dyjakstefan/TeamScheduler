@@ -22,7 +22,7 @@ namespace TeamScheduler.Core.Entities
 
         public virtual Team Team { get; set; }
 
-        public virtual List<UnitOfWork> UnitsOfWork { get; set; }
+        public virtual List<Task> UnitsOfWork { get; set; }
     }
 }
  

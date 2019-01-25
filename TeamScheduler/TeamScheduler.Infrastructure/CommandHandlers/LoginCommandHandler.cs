@@ -13,6 +13,7 @@ using TeamScheduler.Core.Enums;
 using TeamScheduler.Infrastructure.EfContext;
 using TeamScheduler.Infrastructure.Extensions;
 using TeamScheduler.Infrastructure.Services.Abstract;
+using Task = System.Threading.Tasks.Task;
 
 namespace TeamScheduler.Infrastructure.CommandHandlers
 {

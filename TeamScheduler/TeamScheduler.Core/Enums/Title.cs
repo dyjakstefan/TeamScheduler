@@ -7,8 +7,6 @@ namespace TeamScheduler.Core.Enums
     public enum Title
     {
         Manager,
-        Waiter,
-        Barman,
-        Cook
+        Worker
     }
 }

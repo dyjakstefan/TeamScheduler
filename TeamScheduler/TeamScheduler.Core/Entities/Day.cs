@@ -11,8 +11,8 @@ namespace TeamScheduler.Core.Entities
 
         public DayOfWeek DayOfWeek { get; set; }
 
-        public virtual Schedule Schedule { get; set; }
+        //public virtual Schedule Schedule { get; set; }
 
-        public virtual List<UnitOfWork> UnitsOfWorks { get; set; }
+        //public virtual List<Task> UnitsOfWorks { get; set; }
     }
 }

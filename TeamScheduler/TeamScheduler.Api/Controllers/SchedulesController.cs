@@ -56,7 +56,7 @@ namespace TeamScheduler.Api.Controllers
             return Ok(schedule);
         }
 
-        [Route("all")]
+        [Route("all/{teamId}")]
         [HttpGet]
         public async Task<IActionResult> GetAll(int teamId)
         {

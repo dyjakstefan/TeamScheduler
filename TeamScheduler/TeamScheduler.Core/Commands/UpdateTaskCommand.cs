@@ -6,17 +6,17 @@ using Newtonsoft.Json;
 
 namespace TeamScheduler.Core.Commands
 {
-    public class AddScheduleCommand : IRequest
+    public class UpdateTaskCommand : IRequest
     {
         [JsonIgnore]
         public string ManagerId { get; set; }
 
-        public string Name { get; set; }
+        public DateTime Start { get; set; }
 
-        public DateTime StartAt { get; set; }
+        public DateTime End { get; set; }
 
-        public DateTime EndAt { get; set; }
+        public DayOfWeek DayOfWeek { get; set; }
 
-        public int TeamId { get; set; }
+        public int TaskId { get; set; }
     }
 }

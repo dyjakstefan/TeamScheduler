@@ -6,6 +6,9 @@
 
   <ItemGroup>
     <Compile Remove="Migrations\20181126095759_UpdateForeignKey.cs" />
+    <Compile Remove="Migrations\20190124153305_TypoFix.cs" />
+    <Compile Remove="Migrations\20190125143053_DeletedDayTable.cs" />
+    <Compile Remove="Migrations\20190125143647_DeletedDayTable.cs" />
   </ItemGroup>
 
   <ItemGroup>

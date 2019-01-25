@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TeamScheduler.Infrastructure.EfContext;
 
 namespace TeamScheduler.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20190125143923_DeletedDayTable")]
+    partial class DeletedDayTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,15 +87,11 @@ namespace TeamScheduler.Infrastructure.Migrations
 
                     b.Property<int>("MemberId");
 
-                    b.Property<int>("ScheduleId");
-
                     b.Property<DateTime>("Start");
 
                     b.HasKey("Id");
 
                     b.HasIndex("MemberId");
-
-                    b.HasIndex("ScheduleId");
 
                     b.ToTable("Tasks");
                 });
@@ -165,11 +163,6 @@ namespace TeamScheduler.Infrastructure.Migrations
                         .WithMany("UnitsOfWork")
                         .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("TeamScheduler.Core.Entities.Schedule", "Schedule")
-                        .WithMany("Tasks")
-                        .HasForeignKey("ScheduleId")
-                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

@@ -21,12 +21,18 @@ namespace TeamScheduler.Infrastructure.EfContext
 
         public DbSet<Schedule> Schedules { get; set; }
 
-        public DbSet<Day> Days { get; set; }
-
-        public DbSet<UnitOfWork> UnitsOfWork { get; set; }
+        public DbSet<Task> Tasks { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder opitonsBuilder)
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Task>()
+                .HasOne(b => b.Schedule)
+                .WithMany(a => a.Tasks)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

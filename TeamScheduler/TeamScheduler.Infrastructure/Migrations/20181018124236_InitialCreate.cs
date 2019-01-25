@@ -47,7 +47,7 @@ namespace TeamScheduler.Infrastructure.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CreatedAt = table.Column<DateTime>(nullable: false),
-                    EntAt = table.Column<DateTime>(nullable: false),
+                    EndAt = table.Column<DateTime>(nullable: false),
                     IsAccepted = table.Column<bool>(nullable: false),
                     StartAt = table.Column<DateTime>(nullable: false),
                     TeamId = table.Column<int>(nullable: true),

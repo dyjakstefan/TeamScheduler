@@ -107,7 +107,7 @@ namespace TeamScheduler.Infrastructure.Migrations
                     b.ToTable("Teams");
                 });
 
-            modelBuilder.Entity("TeamScheduler.Core.Entities.UnitOfWork", b =>
+            modelBuilder.Entity("TeamScheduler.Core.Entities.Task", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -185,7 +185,7 @@ namespace TeamScheduler.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("TeamScheduler.Core.Entities.UnitOfWork", b =>
+            modelBuilder.Entity("TeamScheduler.Core.Entities.Task", b =>
                 {
                     b.HasOne("TeamScheduler.Core.Entities.Day", "Day")
                         .WithMany("UnitsOfWorks")
