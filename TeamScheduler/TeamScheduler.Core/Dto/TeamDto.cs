@@ -11,5 +11,7 @@ namespace TeamScheduler.Core.Dto
         public string Name { get; set; }
 
         public List<MemberDto> Members { get; set; }
+
+        public List<ScheduleDto> Schedules { get; set; }
     }
 }

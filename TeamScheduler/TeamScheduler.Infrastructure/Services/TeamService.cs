@@ -17,14 +17,14 @@ namespace TeamScheduler.Infrastructure.Services
         private readonly IMapper mapper;
 
         public TeamService(DatabaseContext context, IMapper mapper)
-        {
+        { 
             this.context = context;
             this.mapper = mapper;
         }
 
         public async Task<TeamDto> Get(int id)
         {
-            var team = await context.Teams.Include(x => x.Members).SingleOrDefaultAsync(x => x.Id == id);
+            var team = await context.Teams.Include(x => x.Members).ThenInclude(x => x.User).SingleOrDefaultAsync(x => x.Id == id);
             return team != null ? mapper.Map<TeamDto>(team) : null;
         }
 
@@ -33,7 +33,7 @@ namespace TeamScheduler.Infrastructure.Services
             int parsedUserId;
             if (int.TryParse(userId, out parsedUserId))
             {
-                var teams = await context.Teams.Include(x => x.Members).Where(x => x.Members.Any(z => z.UserId == parsedUserId)).ToListAsync();
+                var teams = await context.Teams.Include(x => x.Members).ThenInclude(x => x.User).Include(x => x.Schedules).Where(x => x.Members.Any(z => z.UserId == parsedUserId)).ToListAsync();
                 return mapper.Map<List<TeamDto>>(teams);
             }
             else
