@@ -71,33 +71,6 @@ namespace TeamScheduler.Infrastructure.Migrations
                     b.ToTable("Schedules");
                 });
 
-            modelBuilder.Entity("TeamScheduler.Core.Entities.Task", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("DayOfWeek");
-
-                    b.Property<DateTime>("End");
-
-                    b.Property<bool>("IsAccepted");
-
-                    b.Property<int>("MemberId");
-
-                    b.Property<int>("ScheduleId");
-
-                    b.Property<DateTime>("Start");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MemberId");
-
-                    b.HasIndex("ScheduleId");
-
-                    b.ToTable("Tasks");
-                });
-
             modelBuilder.Entity("TeamScheduler.Core.Entities.Team", b =>
                 {
                     b.Property<int>("Id")
@@ -138,6 +111,33 @@ namespace TeamScheduler.Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("TeamScheduler.Core.Entities.WorkUnit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DayOfWeek");
+
+                    b.Property<DateTime>("End");
+
+                    b.Property<bool>("IsAccepted");
+
+                    b.Property<int>("MemberId");
+
+                    b.Property<int>("ScheduleId");
+
+                    b.Property<DateTime>("Start");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MemberId");
+
+                    b.HasIndex("ScheduleId");
+
+                    b.ToTable("WorkUnits");
+                });
+
             modelBuilder.Entity("TeamScheduler.Core.Entities.Member", b =>
                 {
                     b.HasOne("TeamScheduler.Core.Entities.Team", "Team")
@@ -159,15 +159,15 @@ namespace TeamScheduler.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("TeamScheduler.Core.Entities.Task", b =>
+            modelBuilder.Entity("TeamScheduler.Core.Entities.WorkUnit", b =>
                 {
                     b.HasOne("TeamScheduler.Core.Entities.Member", "Member")
-                        .WithMany("UnitsOfWork")
+                        .WithMany("WorkUnits")
                         .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("TeamScheduler.Core.Entities.Schedule", "Schedule")
-                        .WithMany("Tasks")
+                        .WithMany("WorkUnits")
                         .HasForeignKey("ScheduleId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });

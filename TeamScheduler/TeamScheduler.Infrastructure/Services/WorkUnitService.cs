@@ -11,22 +11,22 @@ using TeamScheduler.Infrastructure.Services.Abstract;
 
 namespace TeamScheduler.Infrastructure.Services
 {
-    public class TaskService : ITaskService
+    public class WorkUnitService : IWorkUnitService
     {
         private readonly DatabaseContext context;
         private readonly IMapper mapper;
 
-        public TaskService(DatabaseContext context, IMapper mapper)
+        public WorkUnitService(DatabaseContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
         }
 
-        public async Task<List<TaskDto>> GetAll(int scheduleId, DayOfWeek dayOfWeek)
+        public async Task<List<WorkUnitDto>> GetAll(int scheduleId, DayOfWeek dayOfWeek)
         {
-            var tasks = await context.Tasks.Where(x => x.ScheduleId == scheduleId && x.DayOfWeek == dayOfWeek)
+            var tasks = await context.WorkUnits.Where(x => x.ScheduleId == scheduleId && x.DayOfWeek == dayOfWeek)
                 .ToListAsync();
-            return mapper.Map<List<TaskDto>>(tasks);
+            return mapper.Map<List<WorkUnitDto>>(tasks);
         }
     }
 }

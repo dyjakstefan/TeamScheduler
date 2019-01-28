@@ -5,7 +5,7 @@ using TeamScheduler.Core.Abstract;
 
 namespace TeamScheduler.Core.Entities
 {
-    public class Task : Entity
+    public class WorkUnit : Entity
     {
         public DateTime Start { get; set; }
 

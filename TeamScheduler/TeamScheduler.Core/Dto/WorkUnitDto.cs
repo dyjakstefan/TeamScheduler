@@ -5,7 +5,7 @@ using TeamScheduler.Core.Entities;
 
 namespace TeamScheduler.Core.Dto
 {
-    public class TaskDto
+    public class WorkUnitDto
     {
         public int Id { get; set; }
 

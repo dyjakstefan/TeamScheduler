@@ -10,8 +10,8 @@ using TeamScheduler.Infrastructure.EfContext;
 namespace TeamScheduler.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20190125143923_DeletedDayTable")]
-    partial class DeletedDayTable
+    [Migration("20190128152511_WorkUnitTable")]
+    partial class WorkUnitTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -73,29 +73,6 @@ namespace TeamScheduler.Infrastructure.Migrations
                     b.ToTable("Schedules");
                 });
 
-            modelBuilder.Entity("TeamScheduler.Core.Entities.Task", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("DayOfWeek");
-
-                    b.Property<DateTime>("End");
-
-                    b.Property<bool>("IsAccepted");
-
-                    b.Property<int>("MemberId");
-
-                    b.Property<DateTime>("Start");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MemberId");
-
-                    b.ToTable("WorkUnits");
-                });
-
             modelBuilder.Entity("TeamScheduler.Core.Entities.Team", b =>
                 {
                     b.Property<int>("Id")
@@ -136,6 +113,33 @@ namespace TeamScheduler.Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("TeamScheduler.Core.Entities.WorkUnit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DayOfWeek");
+
+                    b.Property<DateTime>("End");
+
+                    b.Property<bool>("IsAccepted");
+
+                    b.Property<int>("MemberId");
+
+                    b.Property<int>("ScheduleId");
+
+                    b.Property<DateTime>("Start");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MemberId");
+
+                    b.HasIndex("ScheduleId");
+
+                    b.ToTable("WorkUnits");
+                });
+
             modelBuilder.Entity("TeamScheduler.Core.Entities.Member", b =>
                 {
                     b.HasOne("TeamScheduler.Core.Entities.Team", "Team")
@@ -157,12 +161,17 @@ namespace TeamScheduler.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("TeamScheduler.Core.Entities.Task", b =>
+            modelBuilder.Entity("TeamScheduler.Core.Entities.WorkUnit", b =>
                 {
                     b.HasOne("TeamScheduler.Core.Entities.Member", "Member")
-                        .WithMany("UnitsOfWork")
+                        .WithMany("WorkUnits")
                         .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TeamScheduler.Core.Entities.Schedule", "Schedule")
+                        .WithMany("WorkUnits")
+                        .HasForeignKey("ScheduleId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

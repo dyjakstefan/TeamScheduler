@@ -21,7 +21,7 @@ namespace TeamScheduler.Infrastructure.EfContext
 
         public DbSet<Schedule> Schedules { get; set; }
 
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<WorkUnit> WorkUnits { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder opitonsBuilder)
         {
@@ -29,9 +29,9 @@ namespace TeamScheduler.Infrastructure.EfContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Task>()
+            modelBuilder.Entity<WorkUnit>()
                 .HasOne(b => b.Schedule)
-                .WithMany(a => a.Tasks)
+                .WithMany(a => a.WorkUnits)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

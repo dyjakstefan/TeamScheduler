@@ -13,32 +13,34 @@ using TeamScheduler.Infrastructure.EfContext;
 
 namespace TeamScheduler.Infrastructure.CommandHandlers
 {
-    public class UpdateTaskCommandHandler : AsyncRequestHandler<UpdateTaskCommand>
+    public class AddWorkUnitCommandHandler : AsyncRequestHandler<AddWorkUnitCommand>
     {
         private readonly DatabaseContext context;
         private readonly IMapper mapper;
 
-        public UpdateTaskCommandHandler(DatabaseContext context, IMapper mapper)
+        public AddWorkUnitCommandHandler(DatabaseContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
         }
 
-        protected override async Task Handle(UpdateTaskCommand request, CancellationToken cancellationToken)
+        protected override async Task Handle(AddWorkUnitCommand request, CancellationToken cancellationToken)
         {
             if (!int.TryParse(request.ManagerId, out var managerId))
             {
                 throw new Exception("Could not parse user id.");
             }
 
-            var task = await context.Tasks.Include(x => x.Schedule.Team)
-                .SingleOrDefaultAsync(x => x.Id == request.TaskId && x.Schedule.Team.Members.Any(y => y.UserId == managerId && y.Title == Title.Manager));
-            if (task == null)
+            var schedule = await context.Schedules.SingleOrDefaultAsync(x => x.Id == request.ScheduleId);
+            var team = await context.Teams.Include(x => x.Members).SingleOrDefaultAsync(x =>
+                x.Id == schedule.TeamId && x.Members.Any(y => y.UserId == managerId && y.Title == Title.Manager));
+            if (team == null || schedule == null)
             {
-                throw new Exception("Could not update this task.");
+                throw new Exception("Could not add this schedule.");
             }
 
-            mapper.Map(request, task);
+            var workUnit = mapper.Map<Core.Entities.WorkUnit>(request);
+            context.WorkUnits.Add(workUnit);
             await context.SaveChangesAsync();
         }
     }

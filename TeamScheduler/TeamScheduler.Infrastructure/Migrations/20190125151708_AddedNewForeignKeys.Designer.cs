@@ -97,7 +97,7 @@ namespace TeamScheduler.Infrastructure.Migrations
 
                     b.HasIndex("ScheduleId");
 
-                    b.ToTable("Tasks");
+                    b.ToTable("WorkUnits");
                 });
 
             modelBuilder.Entity("TeamScheduler.Core.Entities.Team", b =>
@@ -169,7 +169,7 @@ namespace TeamScheduler.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("TeamScheduler.Core.Entities.Schedule", "Schedule")
-                        .WithMany("Tasks")
+                        .WithMany("WorkUnits")
                         .HasForeignKey("ScheduleId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });

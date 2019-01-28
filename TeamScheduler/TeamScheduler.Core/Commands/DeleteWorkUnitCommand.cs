@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace TeamScheduler.Core.Commands
 {
-    public class DeleteTaskCommand : IRequest
+    public class DeleteWorkUnitCommand : IRequest
     {
         [JsonIgnore]
         public string ManagerId { get; set; }

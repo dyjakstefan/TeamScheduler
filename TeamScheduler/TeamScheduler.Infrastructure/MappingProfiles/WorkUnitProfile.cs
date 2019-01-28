@@ -8,13 +8,13 @@ using TeamScheduler.Core.Entities;
 
 namespace TeamScheduler.Infrastructure.MappingProfiles
 {
-    public class TaskProfile : Profile
+    public class WorkUnitProfile : Profile
     {
-        public TaskProfile()
+        public WorkUnitProfile()
         {
-            CreateMap<Task, TaskDto>();
-            CreateMap<AddTaskCommand, Task>();
-            CreateMap<UpdateTaskCommand, Task>();
+            CreateMap<WorkUnit, WorkUnitDto>();
+            CreateMap<AddWorkUnitCommand, WorkUnit>();
+            CreateMap<UpdateWorkUnitCommand, WorkUnit>();
         }
     }
 }

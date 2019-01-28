@@ -32,34 +32,34 @@ namespace TeamScheduler.Infrastructure.Migrations
 
             migrationBuilder.RenameTable(
                 name: "UnitsOfWork",
-                newName: "Tasks");
+                newName: "WorkUnits");
 
             migrationBuilder.RenameIndex(
                 name: "IX_UnitsOfWork_MemberId",
-                table: "Tasks",
+                table: "WorkUnits",
                 newName: "IX_Tasks_MemberId");
 
             migrationBuilder.AlterColumn<int>(
                 name: "MemberId",
-                table: "Tasks",
+                table: "WorkUnits",
                 nullable: false,
                 oldClrType: typeof(int),
                 oldNullable: true);
 
             migrationBuilder.AddColumn<int>(
                 name: "DayOfWeek",
-                table: "Tasks",
+                table: "WorkUnits",
                 nullable: false,
                 defaultValue: 0);
 
             migrationBuilder.AddPrimaryKey(
                 name: "PK_Tasks",
-                table: "Tasks",
+                table: "WorkUnits",
                 column: "Id");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Tasks_Members_MemberId",
-                table: "Tasks",
+                table: "WorkUnits",
                 column: "MemberId",
                 principalTable: "Members",
                 principalColumn: "Id",
@@ -70,18 +70,18 @@ namespace TeamScheduler.Infrastructure.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_Tasks_Members_MemberId",
-                table: "Tasks");
+                table: "WorkUnits");
 
             migrationBuilder.DropPrimaryKey(
                 name: "PK_Tasks",
-                table: "Tasks");
+                table: "WorkUnits");
 
             migrationBuilder.DropColumn(
                 name: "DayOfWeek",
-                table: "Tasks");
+                table: "WorkUnits");
 
             migrationBuilder.RenameTable(
-                name: "Tasks",
+                name: "WorkUnits",
                 newName: "UnitsOfWork");
 
             migrationBuilder.RenameIndex(

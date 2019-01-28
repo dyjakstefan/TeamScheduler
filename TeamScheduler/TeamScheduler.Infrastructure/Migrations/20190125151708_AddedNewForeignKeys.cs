@@ -8,18 +8,18 @@ namespace TeamScheduler.Infrastructure.Migrations
         {
             migrationBuilder.AddColumn<int>(
                 name: "ScheduleId",
-                table: "Tasks",
+                table: "WorkUnits",
                 nullable: false,
                 defaultValue: 0);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tasks_ScheduleId",
-                table: "Tasks",
+                table: "WorkUnits",
                 column: "ScheduleId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Tasks_Schedules_ScheduleId",
-                table: "Tasks",
+                table: "WorkUnits",
                 column: "ScheduleId",
                 principalTable: "Schedules",
                 principalColumn: "Id",
@@ -30,15 +30,15 @@ namespace TeamScheduler.Infrastructure.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_Tasks_Schedules_ScheduleId",
-                table: "Tasks");
+                table: "WorkUnits");
 
             migrationBuilder.DropIndex(
                 name: "IX_Tasks_ScheduleId",
-                table: "Tasks");
+                table: "WorkUnits");
 
             migrationBuilder.DropColumn(
                 name: "ScheduleId",
-                table: "Tasks");
+                table: "WorkUnits");
         }
     }
 }

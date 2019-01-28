@@ -6,8 +6,8 @@ using TeamScheduler.Core.Dto;
 
 namespace TeamScheduler.Infrastructure.Services.Abstract
 {
-    public interface ITaskService : IService
+    public interface IWorkUnitService : IService
     {
-        Task<List<TaskDto>> GetAll(int scheduleId, DayOfWeek dayOfWeek);
+        Task<List<WorkUnitDto>> GetAll(int scheduleId, DayOfWeek dayOfWeek);
     }
 }

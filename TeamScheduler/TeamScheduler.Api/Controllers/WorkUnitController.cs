@@ -15,14 +15,14 @@ namespace TeamScheduler.Api.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class TasksController : Controller
+    public class WorkUnitController : Controller
     {
         private readonly IMediator mediator;
-        private readonly ITaskService taskService;
+        private readonly IWorkUnitService _workUnitService;
 
-        public TasksController(IMediator mediator, ITaskService taskService)
+        public WorkUnitController(IMediator mediator, IWorkUnitService workUnitService)
         {
-            this.taskService = taskService;
+            this._workUnitService = workUnitService;
             this.mediator = mediator;
         }
 
@@ -30,12 +30,12 @@ namespace TeamScheduler.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll(int scheduleId, DayOfWeek dayOfWeek)
         {
-            var tasks = await taskService.GetAll(scheduleId, dayOfWeek);
-            return Ok(tasks);
+            var workUnits = await _workUnitService.GetAll(scheduleId, dayOfWeek);
+            return Ok(workUnits);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] AddTaskCommand command)
+        public async Task<IActionResult> Add([FromBody] AddWorkUnitCommand command)
         {
             command.ManagerId = User.Identity.Name;
             await mediator.Send(command);
@@ -43,7 +43,7 @@ namespace TeamScheduler.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Add([FromBody] UpdateTaskCommand command)
+        public async Task<IActionResult> Add([FromBody] UpdateWorkUnitCommand command)
         {
             command.ManagerId = User.Identity.Name;
             await mediator.Send(command);
@@ -51,7 +51,7 @@ namespace TeamScheduler.Api.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Delete([FromBody] DeleteTaskCommand command)
+        public async Task<IActionResult> Delete([FromBody] DeleteWorkUnitCommand command)
         {
             command.ManagerId = User.Identity.Name;
             await mediator.Send(command);
