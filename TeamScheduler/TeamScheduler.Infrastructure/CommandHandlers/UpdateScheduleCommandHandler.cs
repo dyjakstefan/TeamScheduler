@@ -34,7 +34,7 @@ namespace TeamScheduler.Infrastructure.CommandHandlers
             }
 
             var schedule = await context.Schedules.SingleOrDefaultAsync(x =>
-                x.Id == request.ScheduleId &&
+                x.Id == request.Id &&
                 x.Team.Members.Any(y => y.UserId == managerId && y.Title == Title.Manager));
             if (schedule == null)
             {

@@ -24,7 +24,9 @@ namespace TeamScheduler.Infrastructure.Services
 
         public async Task<List<WorkUnitDto>> GetAll(int scheduleId, DayOfWeek dayOfWeek)
         {
-            var tasks = await context.WorkUnits.Where(x => x.ScheduleId == scheduleId && x.DayOfWeek == dayOfWeek)
+            var tasks = await context.WorkUnits
+                .Where(x => x.ScheduleId == scheduleId && x.DayOfWeek == dayOfWeek)
+                .OrderBy(x => x.Start)
                 .ToListAsync();
             return mapper.Map<List<WorkUnitDto>>(tasks);
         }

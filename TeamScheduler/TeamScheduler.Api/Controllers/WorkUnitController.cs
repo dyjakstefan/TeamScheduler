@@ -42,8 +42,26 @@ namespace TeamScheduler.Api.Controllers
             return Ok();
         }
 
+        [Route("list")]
+        [HttpPost]
+        public async Task<IActionResult> AddList([FromBody] AddWorkUnitsListCommand command)
+        {
+            command.ManagerId = User.Identity.Name;
+            await mediator.Send(command);
+            return Ok();
+        }
+
         [HttpPut]
-        public async Task<IActionResult> Add([FromBody] UpdateWorkUnitCommand command)
+        public async Task<IActionResult> Update([FromBody] UpdateWorkUnitCommand command)
+        {
+            command.ManagerId = User.Identity.Name;
+            await mediator.Send(command);
+            return Ok();
+        }
+
+        [Route("list")]
+        [HttpPut]
+        public async Task<IActionResult> UpdateList([FromBody] UpdateWorkUnitsListCommand command)
         {
             command.ManagerId = User.Identity.Name;
             await mediator.Send(command);

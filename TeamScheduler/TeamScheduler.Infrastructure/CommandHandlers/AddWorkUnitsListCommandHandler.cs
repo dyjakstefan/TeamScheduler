@@ -14,18 +14,18 @@ using TeamScheduler.Infrastructure.EfContext;
 
 namespace TeamScheduler.Infrastructure.CommandHandlers
 {
-    public class AddWorkUnitCommandHandler : AsyncRequestHandler<AddWorkUnitCommand>
+    public class AddWorkUnitsListCommandHandler : AsyncRequestHandler<AddWorkUnitsListCommand>
     {
         private readonly DatabaseContext context;
         private readonly IMapper mapper;
 
-        public AddWorkUnitCommandHandler(DatabaseContext context, IMapper mapper)
+        public AddWorkUnitsListCommandHandler(DatabaseContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
         }
 
-        protected override async Task Handle(AddWorkUnitCommand request, CancellationToken cancellationToken)
+        protected override async Task Handle(AddWorkUnitsListCommand request, CancellationToken cancellationToken)
         {
             if (!int.TryParse(request.ManagerId, out var managerId))
             {
@@ -37,10 +37,15 @@ namespace TeamScheduler.Infrastructure.CommandHandlers
                 x.Id == schedule.TeamId && x.Members.Any(y => y.UserId == managerId && y.Title == Title.Manager));
             if (team == null || schedule == null)
             {
-                throw new Exception("Could not add this schedule.");
+                throw new Exception("Could not add this work units.");
             }
-            var workUnit = mapper.Map<WorkUnit>(request);
-            context.WorkUnits.Add(workUnit);
+            var workUnits = mapper.Map<List<WorkUnit>>(request.WorkUnits);
+            foreach (var workUnit in workUnits)
+            {
+                workUnit.MemberId = request.MemberId;
+                workUnit.ScheduleId = request.ScheduleId;
+            }
+            context.WorkUnits.AddRange(workUnits);
             await context.SaveChangesAsync();
         }
     }

@@ -14,7 +14,8 @@ namespace TeamScheduler.Infrastructure.MappingProfiles
         {
             CreateMap<WorkUnit, WorkUnitDto>();
             CreateMap<AddWorkUnitCommand, WorkUnit>();
-            CreateMap<UpdateWorkUnitCommand, WorkUnit>();
+            CreateMap<UpdateWorkUnitCommand, WorkUnit>()
+                .ForMember(x => x.Id, opt => opt.Ignore());
         }
     }
 }

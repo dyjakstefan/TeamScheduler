@@ -9,8 +9,6 @@ namespace TeamScheduler.Core.Entities
     {
         public string Name { get; set; }
 
-        public string Address { get; set; }
-
         public virtual List<Member> Members { get; set; }
 
         public virtual List<Schedule> Schedules { get; set; }

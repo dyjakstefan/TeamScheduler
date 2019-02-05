@@ -7,13 +7,13 @@ namespace TeamScheduler.Core.Entities
 {
     public class WorkUnit : Entity
     {
-        public DateTime Start { get; set; }
+        public string Description { get; set; }
 
-        public DateTime End { get; set; }
+        public TimeSpan Start { get; set; }
+
+        public TimeSpan End { get; set; }
 
         public DayOfWeek DayOfWeek { get; set; }
-
-        public bool IsAccepted { get; set; }
 
         public int ScheduleId { get; set; }
 

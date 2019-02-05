@@ -11,12 +11,14 @@ namespace TeamScheduler.Core.Commands
         [JsonIgnore]
         public string ManagerId { get; set; }
 
-        public int ScheduleId { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
         public DateTime StartAt { get; set; }
 
         public DateTime EndAt { get; set; }
+
+        public string Description { get; set; }
     }
 }

@@ -13,6 +13,7 @@ namespace TeamScheduler.Infrastructure.MappingProfiles
         public ScheduleProfile()
         {
             CreateMap<AddScheduleCommand, Schedule>();
+            CreateMap<UpdateScheduleCommand, Schedule>();
             CreateMap<Schedule, ScheduleDto>();
         }
     }

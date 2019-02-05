@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TeamScheduler.Infrastructure.EfContext;
 
 namespace TeamScheduler.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20190129134015_ChangeDateTimeToTimeSpanInWorkUnit")]
+    partial class ChangeDateTimeToTimeSpanInWorkUnit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,9 +54,9 @@ namespace TeamScheduler.Infrastructure.Migrations
 
                     b.Property<DateTime>("CreatedAt");
 
-                    b.Property<string>("Description");
-
                     b.Property<DateTime>("EndAt");
+
+                    b.Property<bool>("IsAccepted");
 
                     b.Property<string>("Name");
 
@@ -77,6 +79,8 @@ namespace TeamScheduler.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Address");
+
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
@@ -98,6 +102,8 @@ namespace TeamScheduler.Infrastructure.Migrations
 
                     b.Property<string>("Password");
 
+                    b.Property<string>("PhoneNumber");
+
                     b.Property<int>("Role");
 
                     b.Property<string>("Salt");
@@ -115,9 +121,9 @@ namespace TeamScheduler.Infrastructure.Migrations
 
                     b.Property<int>("DayOfWeek");
 
-                    b.Property<string>("Description");
-
                     b.Property<TimeSpan>("End");
+
+                    b.Property<bool>("IsAccepted");
 
                     b.Property<int>("MemberId");
 

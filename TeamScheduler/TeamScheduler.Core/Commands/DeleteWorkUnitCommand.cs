@@ -11,6 +11,6 @@ namespace TeamScheduler.Core.Commands
         [JsonIgnore]
         public string ManagerId { get; set; }
 
-        public int TaskId { get; set; }
+        public int Id { get; set; }
     }
 }
