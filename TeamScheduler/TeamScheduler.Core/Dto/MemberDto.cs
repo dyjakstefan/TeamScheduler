@@ -18,5 +18,7 @@ namespace TeamScheduler.Core.Dto
         public UserDto User { get; set; }
 
         public int TeamId { get; set; }
+
+        public TimeSpan AssignedTime { get; set; }
     }
 }
