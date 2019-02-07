@@ -63,5 +63,21 @@ namespace TeamScheduler.Api.Controllers
             var schedules = await scheduleService.GetAllForTeam(teamId);
             return Ok(schedules);
         }
+
+        [HttpGet("report/{scheduleId}")]
+        public async Task<IActionResult> GetReport(int scheduleId)
+        {
+            var userId = User.Identity.Name;
+            var days = await scheduleService.GetReport(scheduleId, userId);
+            return Ok(days);
+        }
+
+        [HttpGet("report2/{scheduleId}")]
+        public async Task<IActionResult> GetReport2(int scheduleId)
+        {
+            var userId = User.Identity.Name;
+            var days = await scheduleService.GetReport2(scheduleId, userId);
+            return Ok(days);
+        }
     }
 }

@@ -8,6 +8,6 @@ namespace TeamScheduler.Core.Dto
     {
         public DayOfWeek Day { get; set; }
 
-        public List<HoursDto> Hours { get; set; }
+        public List<HourDto> Hours { get; set; }
     }
 }
