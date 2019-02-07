@@ -19,6 +19,10 @@ namespace TeamScheduler.Core.Entities
 
         public DateTime EndAt { get; set; }
 
+        public TimeSpan StartOfWorkingTime { get; set; }
+
+        public TimeSpan EndOfWorkingTime { get; set; }
+
         public int TeamId { get; set; }
 
         public virtual Team Team { get; set; }
