@@ -39,7 +39,7 @@ namespace TeamScheduler.Infrastructure.CommandHandlers
             if (team != null)
             {
                 var user = await context.Users.SingleOrDefaultAsync(x => x.Email == request.Email);
-                if (team.Members.All(x => x.Id != user.Id))
+                if (team.Members.All(x => x.UserId != user.Id))
                 {
                     var member = mapper.Map<Member>(request);
                     member.UserId = user.Id;

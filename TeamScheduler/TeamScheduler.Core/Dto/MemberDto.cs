@@ -15,6 +15,8 @@ namespace TeamScheduler.Core.Dto
 
         public bool IsPartTime { get; set; }
 
+        public int UserId { get; set; }
+
         public UserDto User { get; set; }
 
         public int TeamId { get; set; }

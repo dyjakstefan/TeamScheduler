@@ -49,10 +49,6 @@ namespace TeamScheduler.Infrastructure.CommandHandlers
                 {
                     mapper.Map(singleWorkUnit, workUnit);
                 }
-                else
-                {
-                    context.WorkUnits.Remove(workUnit);
-                }
             }
 
             await context.SaveChangesAsync();
