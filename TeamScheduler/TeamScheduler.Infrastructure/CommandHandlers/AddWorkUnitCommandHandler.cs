@@ -34,7 +34,7 @@ namespace TeamScheduler.Infrastructure.CommandHandlers
 
             var schedule = await context.Schedules.SingleOrDefaultAsync(x => x.Id == request.ScheduleId);
             var team = await context.Teams.Include(x => x.Members).SingleOrDefaultAsync(x =>
-                x.Id == schedule.TeamId && x.Members.Any(y => y.UserId == managerId && y.Title == Title.Manager));
+                x.Id == schedule.TeamId && x.Members.Any(y => y.UserId == managerId && (y.Title == Title.Manager || y.UserId == schedule.CreatorId)));
             if (team == null || schedule == null)
             {
                 throw new Exception("Could not add this schedule.");

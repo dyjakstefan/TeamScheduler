@@ -24,6 +24,8 @@ namespace TeamScheduler.Core.Dto
 
         public TimeSpan EndOfWorkingTime { get; set; }
 
+        public int CreatorId { get; set; }
+
         public int TeamId { get; set; }
     }
 }

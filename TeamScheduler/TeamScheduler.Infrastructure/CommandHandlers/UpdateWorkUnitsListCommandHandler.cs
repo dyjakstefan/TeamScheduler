@@ -34,7 +34,7 @@ namespace TeamScheduler.Infrastructure.CommandHandlers
             var workUnits = await context.WorkUnits
                 .Include(x => x.Schedule)
                 .ThenInclude(x => x.Team)
-                .Where(x => x.MemberId == request.MemberId && x.ScheduleId == request.ScheduleId && x.Schedule.Team.Members.Any(y => y.UserId == managerId && y.Title == Title.Manager))
+                .Where(x => x.MemberId == request.MemberId && x.ScheduleId == request.ScheduleId && x.DayOfWeek == request.Day && x.Schedule.Team.Members.Any(y => y.UserId == managerId && (y.Title == Title.Manager || y.UserId == x.Schedule.CreatorId)))
                 .ToListAsync();
 
             if (workUnits.Count == 0)
@@ -48,6 +48,10 @@ namespace TeamScheduler.Infrastructure.CommandHandlers
                 if (singleWorkUnit != null)
                 {
                     mapper.Map(singleWorkUnit, workUnit);
+                }
+                else
+                {
+                    context.WorkUnits.Remove(workUnit);
                 }
             }
 

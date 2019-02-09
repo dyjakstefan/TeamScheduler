@@ -33,6 +33,10 @@ namespace TeamScheduler.Infrastructure.EfContext
                 .HasOne(b => b.Schedule)
                 .WithMany(a => a.WorkUnits)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Schedule>()
+                .HasOne(x => x.Creator)
+                .WithMany(x => x.OwnSchedules);
         }
     }
 }

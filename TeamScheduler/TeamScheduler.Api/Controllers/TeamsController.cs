@@ -47,8 +47,7 @@ namespace TeamScheduler.Api.Controllers
             return Ok();
         }
 
-        [Route("all")]
-        [HttpGet]
+        [HttpGet("all")]
         public async Task<IActionResult> GetAllTeams()
         {
             var teams = await teamService.GetAllForUser(User.Identity.Name);

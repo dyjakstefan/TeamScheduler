@@ -28,7 +28,7 @@ namespace TeamScheduler.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] AddScheduleCommand command)
         {
-            command.ManagerId = User.Identity.Name;
+            command.UserId = User.Identity.Name;
             await mediator.Send(command);
             return Ok();
         }

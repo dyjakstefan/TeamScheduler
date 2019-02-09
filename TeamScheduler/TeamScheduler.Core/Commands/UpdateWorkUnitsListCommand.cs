@@ -15,6 +15,8 @@ namespace TeamScheduler.Core.Commands
 
         public int MemberId { get; set; }
 
+        public DayOfWeek Day { get; set; }
+
         public List<UpdateWorkUnitCommand> WorkUnits { get; set; }
     }
 }

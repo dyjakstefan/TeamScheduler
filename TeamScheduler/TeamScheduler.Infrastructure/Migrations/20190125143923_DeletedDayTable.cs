@@ -37,7 +37,7 @@ namespace TeamScheduler.Infrastructure.Migrations
             migrationBuilder.RenameIndex(
                 name: "IX_UnitsOfWork_MemberId",
                 table: "WorkUnits",
-                newName: "IX_Tasks_MemberId");
+                newName: "IX_WorkUnits_MemberId");
 
             migrationBuilder.AlterColumn<int>(
                 name: "MemberId",

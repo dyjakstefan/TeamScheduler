@@ -12,6 +12,9 @@
     <Compile Remove="Migrations\20190128151935_WorkUnitTable.cs" />
     <Compile Remove="Migrations\20190128152427_WorkUnitTable.cs" />
     <Compile Remove="Migrations\20190207125221_AddedWorkingTimeIntoSchedule.cs" />
+    <Compile Remove="Migrations\20190208184411_AddedCreatorToSchedule.cs" />
+    <Compile Remove="Migrations\20190208185428_AddedCreatorToSchedule.cs" />
+    <Compile Remove="Migrations\20190208185758_AddedCreatorToSchedule.cs" />
   </ItemGroup>
 
   <ItemGroup>

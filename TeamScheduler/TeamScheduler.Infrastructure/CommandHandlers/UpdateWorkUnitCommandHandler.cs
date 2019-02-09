@@ -32,7 +32,7 @@ namespace TeamScheduler.Infrastructure.CommandHandlers
             }
 
             var workUnit = await context.WorkUnits.Include(x => x.Schedule.Team)
-                .SingleOrDefaultAsync(x => x.Id == request.Id && x.Schedule.Team.Members.Any(y => y.UserId == managerId && y.Title == Title.Manager));
+                .SingleOrDefaultAsync(x => x.Id == request.Id && x.Schedule.Team.Members.Any(y => y.UserId == managerId && (y.Title == Title.Manager || y.UserId == x.Schedule.CreatorId)));
             if (workUnit == null)
             {
                 throw new Exception("Could not update this task.");

@@ -9,7 +9,7 @@ namespace TeamScheduler.Core.Commands
     public class AddScheduleCommand : IRequest
     {
         [JsonIgnore]
-        public string ManagerId { get; set; }
+        public string UserId { get; set; }
 
         public string Name { get; set; }
 
