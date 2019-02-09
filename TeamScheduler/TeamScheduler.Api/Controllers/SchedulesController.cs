@@ -14,7 +14,7 @@ namespace TeamScheduler.Api.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class SchedulesController : Controller
+    public class SchedulesController : ControllerBase
     {
         private readonly IMediator mediator;
         private readonly IScheduleService scheduleService;
@@ -56,8 +56,7 @@ namespace TeamScheduler.Api.Controllers
             return Ok(schedule);
         }
 
-        [Route("all/{teamId}")]
-        [HttpGet]
+        [HttpGet("all/{teamId}")]
         public async Task<IActionResult> GetAll(int teamId)
         {
             var schedules = await scheduleService.GetAllForTeam(teamId);

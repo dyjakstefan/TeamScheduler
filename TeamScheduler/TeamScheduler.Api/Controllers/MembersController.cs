@@ -13,7 +13,7 @@ namespace TeamScheduler.Api.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class MembersController : Controller
+    public class MembersController : ControllerBase
     {
         private readonly IMediator mediator;
         private readonly IMemberService memberService;

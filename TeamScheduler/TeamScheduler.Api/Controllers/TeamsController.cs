@@ -14,7 +14,7 @@ namespace TeamScheduler.Api.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class TeamsController : Controller
+    public class TeamsController : ControllerBase
     {
         private readonly IMediator mediator;
         private readonly ITeamService teamService;

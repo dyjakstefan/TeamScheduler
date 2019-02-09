@@ -35,7 +35,7 @@ namespace TeamScheduler.Infrastructure.CommandHandlers
 
             var schedule = await context.Schedules.SingleOrDefaultAsync(x =>
                 x.Id == request.Id &&
-                x.Team.Members.Any(y => y.UserId == managerId && y.Title == Title.Manager));
+                x.Team.Members.Any(y => y.UserId == managerId && (y.Title == Title.Manager || y.UserId == x.CreatorId)));
             if (schedule == null)
             {
                 throw new Exception("Could not update this schedule.");

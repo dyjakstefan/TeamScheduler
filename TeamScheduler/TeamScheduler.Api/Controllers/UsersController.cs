@@ -17,7 +17,7 @@ namespace TeamScheduler.Api.Controllers
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : Controller
+    public class UsersController : ControllerBase
     {
         private readonly IMediator mediator;
         private readonly IUserService userService;
@@ -40,9 +40,8 @@ namespace TeamScheduler.Api.Controllers
             return Ok(jwt);
         }
 
-        [Route("login")]
         [AllowAnonymous]
-        [HttpPost]
+        [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginCommand command)
         {
             command.TokenId = Guid.NewGuid();

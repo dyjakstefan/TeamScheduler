@@ -33,7 +33,7 @@ namespace TeamScheduler.Infrastructure.CommandHandlers
 
             var schedule = await context.Schedules.Include(x => x.Team).ThenInclude(x => x.Members).SingleOrDefaultAsync(x =>
                 x.Id == request.ScheduleId &&
-                x.Team.Members.Any(y => y.UserId == managerId && y.Title == Title.Manager));
+                x.Team.Members.Any(y => y.UserId == managerId && (y.Title == Title.Manager || y.UserId == x.CreatorId)));
 
             if (schedule == null)
             {

@@ -15,7 +15,7 @@ namespace TeamScheduler.Api.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class WorkUnitController : Controller
+    public class WorkUnitController : ControllerBase
     {
         private readonly IMediator mediator;
         private readonly IWorkUnitService _workUnitService;
@@ -26,8 +26,7 @@ namespace TeamScheduler.Api.Controllers
             this.mediator = mediator;
         }
 
-        [Route("{scheduleId}/{dayOfWeek}")]
-        [HttpGet]
+        [HttpGet("{scheduleId}/{dayOfWeek}")]
         public async Task<IActionResult> GetAll(int scheduleId, DayOfWeek dayOfWeek)
         {
             var workUnits = await _workUnitService.GetAll(scheduleId, dayOfWeek);
@@ -42,8 +41,7 @@ namespace TeamScheduler.Api.Controllers
             return Ok();
         }
 
-        [Route("list")]
-        [HttpPost]
+        [HttpPost("list")]
         public async Task<IActionResult> AddList([FromBody] AddWorkUnitsListCommand command)
         {
             command.ManagerId = User.Identity.Name;
@@ -59,8 +57,7 @@ namespace TeamScheduler.Api.Controllers
             return Ok();
         }
 
-        [Route("list")]
-        [HttpPut]
+        [HttpPut("list")]
         public async Task<IActionResult> UpdateList([FromBody] UpdateWorkUnitsListCommand command)
         {
             command.ManagerId = User.Identity.Name;
