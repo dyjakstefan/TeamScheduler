@@ -45,8 +45,8 @@ namespace TeamScheduler.Infrastructure.CommandHandlers
             var salt = encrypter.GetSalt(request.Password);
             var hash = encrypter.GetHash(request.Password, salt);
             var user = mapper.Map<User>(request);
-            user.SetPassword(hash);
-            user.SetSalt(salt);
+            user.Password = hash;
+            user.Salt = salt;
             context.Add(user);
             await context.SaveChangesAsync();
             var jwt = jwtService.CreateToken(user.Id, Role.Admin.ToString());

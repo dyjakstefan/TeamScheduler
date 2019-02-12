@@ -5,19 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20181126095759_UpdateForeignKey.cs" />
-    <Compile Remove="Migrations\20190124153305_TypoFix.cs" />
-    <Compile Remove="Migrations\20190125143053_DeletedDayTable.cs" />
-    <Compile Remove="Migrations\20190125143647_DeletedDayTable.cs" />
-    <Compile Remove="Migrations\20190128151935_WorkUnitTable.cs" />
-    <Compile Remove="Migrations\20190128152427_WorkUnitTable.cs" />
-    <Compile Remove="Migrations\20190207125221_AddedWorkingTimeIntoSchedule.cs" />
-    <Compile Remove="Migrations\20190208184411_AddedCreatorToSchedule.cs" />
-    <Compile Remove="Migrations\20190208185428_AddedCreatorToSchedule.cs" />
-    <Compile Remove="Migrations\20190208185758_AddedCreatorToSchedule.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="MediatR" Version="5.1.0" />

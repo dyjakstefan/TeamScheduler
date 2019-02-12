@@ -23,15 +23,5 @@ namespace TeamScheduler.Core.Entities
         public virtual List<Member> Members { get; set; }
 
         public virtual List<Schedule> OwnSchedules { get; set; }
-
-        public void SetPassword(string hash)
-        {
-            this.Password = hash;
-        }
-
-        public void SetSalt(string salt)
-        {
-            this.Salt = salt;
-        }
     }
 }
