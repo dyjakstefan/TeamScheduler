@@ -66,7 +66,6 @@ namespace TeamScheduler.Infrastructure.Services
         public async Task<List<WorkHourDto>> GetReport2(int scheduleId, string userId)
         {
             var schedule = await context.Schedules.Include(x => x.WorkUnits).SingleOrDefaultAsync(x => x.Id == scheduleId);
-            var days = new List<DayDto>();
             var workHours = new List<WorkHourDto>();
             var workUnits = schedule.WorkUnits.Where(x => x.Start >= schedule.StartOfWorkingTime && x.End <= schedule.EndOfWorkingTime).ToList();
             for (int i = schedule.StartOfWorkingTime.Hours; i < schedule.EndOfWorkingTime.Hours; i++)

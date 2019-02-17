@@ -49,7 +49,7 @@ namespace TeamScheduler.Api.Controllers
             return Ok();
         }
 
-        [HttpGet]
+        [HttpGet("{scheduleId}")]
         public async Task<IActionResult> Get(int scheduleId)
         {
             var schedule = await scheduleService.Get(scheduleId);
