@@ -11,7 +11,7 @@ using TeamScheduler.Infrastructure.Services.Abstract;
 
 namespace TeamScheduler.Api.Controllers
 {
-    [Authorize]
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class TeamsController : ControllerBase

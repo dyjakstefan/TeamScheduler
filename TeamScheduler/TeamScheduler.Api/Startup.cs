@@ -96,7 +96,11 @@ namespace TeamScheduler.Api
 
             app.UseAuthentication();
             app.UseCors(builder =>
-                builder.AllowAnyOrigin());
+                builder.AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowAnyOrigin()
+                    .AllowCredentials()
+                );
             app.UseMvc();
             appLifeTime.ApplicationStopped.Register(() => ApplicationContainer.Dispose());
         }
